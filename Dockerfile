@@ -1,4 +1,4 @@
-FROM rocker/verse:4.4.2
+FROM rocker/rstudio:4.4.2
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -20,6 +20,18 @@ RUN apt-get update && apt-get install -y \
     libsodium-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install R packages that are typically in verse image
+RUN install2.r --error --skipinstalled \
+    tidyverse \
+    ggplot2 \
+    dplyr \
+    tidyr \
+    readr \
+    purrr \
+    tibble \
+    stringr \
+    forcats
+
 # Install Quarto
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-amd64.deb \
     && dpkg -i quarto-1.6.39-linux-amd64.deb \
@@ -38,5 +50,13 @@ RUN R -e "renv::consent(provided = TRUE); renv::init()"
 # Add .Rprofile after renv is initialized
 RUN echo 'source("renv/activate.R")' > .Rprofile
 
-# Set up entry point
-CMD ["R"]
+# Expose RStudio Server port
+EXPOSE 8787
+
+# Set environment variables for RStudio
+ENV DISABLE_AUTH=true
+ENV ROOT=true
+ENV PATH=/usr/lib/rstudio-server/bin:$PATH
+
+# Set up entry point to start RStudio Server
+CMD ["/init"]

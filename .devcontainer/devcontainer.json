@@ -1,5 +1,5 @@
 {
-  "name": "R Development Environment",
+  "name": "R Development Environment with RStudio",
   "build": {
     "dockerfile": "../Dockerfile",
     "context": ".."
@@ -15,9 +15,30 @@
         "r.bracketedPaste": true,
         "r.sessionWatcher": true
       }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md"
+      ]
     }
   },
+  // Forward the RStudio port
   "forwardPorts": [8787],
+  
+  // Run renv::restore() and start RStudio Server
   "postCreateCommand": "R -e 'renv::restore(confirm = FALSE)'",
-  "remoteUser": "rstudio"
+  
+  // Add a command to show the URL to RStudio in the terminal
+  "postStartCommand": "echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
+  
+  // Use rstudio user
+  "remoteUser": "rstudio",
+  
+  // Show port in UI
+  "portsAttributes": {
+    "8787": {
+      "label": "RStudio",
+      "onAutoForward": "openBrowser"
+    }
+  }
 }
