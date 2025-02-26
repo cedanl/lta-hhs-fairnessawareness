@@ -56,7 +56,7 @@ EXPOSE 8787
 
 # Set environment variables for RStudio
 ENV DISABLE_AUTH=true
-ENV ROOT=true
+ENV RSTUDIO_AUTH_NONE=true
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
 # Create vscode user and set it as default
@@ -65,7 +65,16 @@ RUN useradd -m -s /bin/bash vscode && \
     echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
     chown -R vscode:vscode /workspaces && \
     # Grant vscode user permissions to run as rstudio-server
-    usermod -aG rstudio-server vscode
+    usermod -aG rstudio-server vscode && \
+    # Create R package library for vscode user
+    mkdir -p /home/vscode/R/library && \
+    chown -R vscode:vscode /home/vscode/R && \
+    # Give write permission to the site-library directory
+    chmod -R 777 /usr/local/lib/R/site-library
+
+# Set R library path for vscode user
+ENV R_LIBS_USER=/home/vscode/R/library
+ENV R_LIBS_SITE=/usr/local/lib/R/site-library
 
 # Use vscode user (default for Codespaces)
 USER vscode
