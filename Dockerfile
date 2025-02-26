@@ -60,6 +60,6 @@ ENV ROOT=true
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
 # Set up entry point to start RStudio Server as rstudio-server user
-USER rstudio-server
-CMD ["/init"]
-# CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]
+USER vscode
+# CMD ["/init"]
+CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]

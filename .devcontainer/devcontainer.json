@@ -31,8 +31,8 @@
   // Add a command to show the URL to RStudio in the terminal
   "postStartCommand": "echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
   
-  // Use rstudio-server user
-  "remoteUser": "rstudio-server",
+  // Use vscode user (default for Codespaces)
+  "remoteUser": "vscode",
   
   // Show port in UI
   "portsAttributes": {
