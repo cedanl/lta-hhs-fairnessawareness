@@ -1,0 +1,26 @@
+{
+    "name": "R Project",
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "REditorSupport.r",
+                "quarto.quarto",
+                "ms-vsliveshare.vsliveshare"
+            ],
+            "settings": {
+                "r.rterm.linux": "/usr/local/bin/R",
+                "r.bracketedPaste": true,
+                "r.plot.useHttpgd": true,
+                "editor.wordWrap": "on",
+                "editor.formatOnSave": true
+            }
+        }
+    },
+    "forwardPorts": [8787],
+    "postCreateCommand": "R -e 'renv::restore()'",
+    "remoteUser": "rstudio"
+}
