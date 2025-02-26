@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libcairo2-dev \
     libbz2-dev \
     libsodium-dev \
+    libmagick++-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages that are typically in verse image
