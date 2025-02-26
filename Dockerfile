@@ -63,9 +63,10 @@ ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 RUN useradd -m -s /bin/bash vscode && \
     usermod -aG sudo vscode && \
     echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
-    chown -R vscode:vscode /workspaces
+    chown -R vscode:vscode /workspaces && \
+    # Grant vscode user permissions to run as rstudio-server
+    usermod -aG rstudio-server vscode
 
-# Set up entry point to start RStudio Server as rstudio-server user
+# Use vscode user (default for Codespaces)
 USER vscode
-# CMD ["/init"]
 CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]

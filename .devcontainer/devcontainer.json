@@ -40,12 +40,10 @@
       "label": "RStudio",
       "onAutoForward": "openBrowser"
     }
-  }
-  /*
+  },
   // Optional: Uncomment to explicitly set environment variables at runtime
   "containerEnv": {
     "DISABLE_AUTH": "true",
     "ROOT": "true"
   }
-  */
 }
