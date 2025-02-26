@@ -19,11 +19,6 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev \
     libsodium-dev \
     libmagick++-dev \
-    imagemagick \  # Installs ImageMagick binaries
-    net-tools \    # For netstat
-    curl \         # For HTTP testing
-    lsof \         # For port checking
-    systemd \      # For journalctl
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages that are typically in verse image
