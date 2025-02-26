@@ -59,6 +59,12 @@ ENV DISABLE_AUTH=true
 ENV ROOT=true
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
+# Create vscode user and set it as default
+RUN useradd -m -s /bin/bash vscode && \
+    usermod -aG sudo vscode && \
+    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
+    chown -R vscode:vscode /workspaces
+
 # Set up entry point to start RStudio Server as rstudio-server user
 USER vscode
 # CMD ["/init"]
