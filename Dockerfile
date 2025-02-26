@@ -59,11 +59,16 @@ ENV DISABLE_AUTH=true
 ENV RSTUDIO_AUTH_NONE=true
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
+# Configure RStudio Server for passwordless login
+RUN echo "auth-none=1" >> /etc/rstudio/rserver.conf
+RUN echo "www-port=8787" >> /etc/rstudio/rserver.conf
+
 # Create vscode user and set it as default
 RUN useradd -m -s /bin/bash vscode && \
     usermod -aG sudo vscode && \
     echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
     chown -R vscode:vscode /workspaces && \
+    chmod -R 755 /workspaces && \
     # Grant vscode user permissions to run as rstudio-server
     usermod -aG rstudio-server vscode && \
     # Create R package library for vscode user
@@ -75,6 +80,9 @@ RUN useradd -m -s /bin/bash vscode && \
 # Set R library path for vscode user
 ENV R_LIBS_USER=/home/vscode/R/library
 ENV R_LIBS_SITE=/usr/local/lib/R/site-library
+
+# Set up symbolic link for the project
+RUN ln -s /workspaces/lta-hhs-fairnessawareness /home/vscode/lta-hhs-fairnessawareness
 
 # Use vscode user (default for Codespaces)
 USER vscode

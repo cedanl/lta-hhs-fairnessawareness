@@ -28,8 +28,11 @@
   // Run renv::restore() with proper library path
   "postCreateCommand": "R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\")'",
   
-  // Add a command to show the URL to RStudio in the terminal
-  "postStartCommand": "echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
+  // Add a command to show the URL to RStudio in the terminal and start RStudio Server
+  "postStartCommand": "sudo rstudio-server start && echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
+  
+  // Commands to run after the container is attached
+  "postAttachCommand": "sudo rstudio-server status",
   
   // Use vscode user (default for Codespaces)
   "remoteUser": "vscode",
@@ -38,7 +41,8 @@
   "portsAttributes": {
     "8787": {
       "label": "RStudio",
-      "onAutoForward": "openBrowser"
+      "onAutoForward": "openBrowser",
+      "visibility": "public"
     }
   },
   // Explicitly set environment variables at runtime
