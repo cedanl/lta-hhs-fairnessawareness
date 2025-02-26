@@ -19,6 +19,11 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev \
     libsodium-dev \
     libmagick++-dev \
+    imagemagick \  # Installs ImageMagick binaries
+    net-tools \    # For netstat
+    curl \         # For HTTP testing
+    lsof \         # For port checking
+    systemd \      # For journalctl
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages that are typically in verse image
@@ -44,7 +49,7 @@ WORKDIR /workspaces/project
 # Install renv
 RUN R -e "install.packages('renv', repos = 'https://cloud.r-project.org/')"
 
-# Set up renv - FIXED SECTION
+# Set up renv
 COPY renv.lock ./
 RUN R -e "renv::consent(provided = TRUE); renv::init()"
 
@@ -59,5 +64,6 @@ ENV DISABLE_AUTH=true
 ENV ROOT=true
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
-# Set up entry point to start RStudio Server
-CMD ["/init"]
+# Set up entry point to start RStudio Server as rstudio-server user
+USER rstudio-server
+CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]

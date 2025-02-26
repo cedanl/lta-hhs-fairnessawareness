@@ -31,8 +31,8 @@
   // Add a command to show the URL to RStudio in the terminal
   "postStartCommand": "echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
   
-  // Use rstudio user
-  "remoteUser": "rstudio",
+  // Use rstudio-server user
+  "remoteUser": "rstudio-server",
   
   // Show port in UI
   "portsAttributes": {
@@ -41,4 +41,11 @@
       "onAutoForward": "openBrowser"
     }
   }
+  /*
+  // Optional: Uncomment to explicitly set environment variables at runtime
+  "containerEnv": {
+    "DISABLE_AUTH": "true",
+    "ROOT": "true"
+  }
+  */
 }
