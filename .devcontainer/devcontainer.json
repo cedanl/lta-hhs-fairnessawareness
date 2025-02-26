@@ -1,26 +1,23 @@
 {
-    "name": "R Project",
-    "build": {
-        "dockerfile": "../Dockerfile",
-        "context": ".."
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "REditorSupport.r",
-                "quarto.quarto",
-                "ms-vsliveshare.vsliveshare"
-            ],
-            "settings": {
-                "r.rterm.linux": "/usr/local/bin/R",
-                "r.bracketedPaste": true,
-                "r.plot.useHttpgd": true,
-                "editor.wordWrap": "on",
-                "editor.formatOnSave": true
-            }
-        }
-    },
-    "forwardPorts": [8787],
-    "postCreateCommand": "R -e 'renv::restore()'",
-    "remoteUser": "rstudio"
+  "name": "R Development Environment",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "reditorsupport.r",
+        "quarto.quarto"
+      ],
+      "settings": {
+        "r.alwaysUseActiveTerminal": true,
+        "r.bracketedPaste": true,
+        "r.sessionWatcher": true
+      }
+    }
+  },
+  "forwardPorts": [8787],
+  "postCreateCommand": "R -e 'renv::restore(confirm = FALSE)'",
+  "remoteUser": "rstudio"
 }
