@@ -61,4 +61,5 @@ ENV PATH=/usr/lib/rstudio-server/bin:$PATH
 
 # Set up entry point to start RStudio Server as rstudio-server user
 USER rstudio-server
-CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]
+CMD ["/init"]
+# CMD ["/usr/lib/rstudio-server/bin/rserver", "--www-port", "8787", "--server-daemonize=0"]
