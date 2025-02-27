@@ -1,5 +1,5 @@
 {
-  "name": "R Development Environment with RStudio",
+  "name": "R Development Environment",
   "build": {
     "dockerfile": "../Dockerfile",
     "context": ".."
@@ -8,12 +8,15 @@
     "vscode": {
       "extensions": [
         "reditorsupport.r",
-        "quarto.quarto"
+        "quarto.quarto",
+        "REditorSupport.r-lsp"
       ],
       "settings": {
         "r.alwaysUseActiveTerminal": true,
         "r.bracketedPaste": true,
-        "r.sessionWatcher": true
+        "r.sessionWatcher": true,
+        "r.rterm.linux": "/usr/local/bin/R",
+        "r.rpath.linux": "/usr/local/bin/R"
       }
     },
     "codespaces": {
@@ -22,32 +25,16 @@
       ]
     }
   },
-  // Forward the RStudio port
-  "forwardPorts": [8787],
   
   // Run renv::restore() with proper library path
   "postCreateCommand": "R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\")'",
   
-  // Add a command to show the URL to RStudio in the terminal and start RStudio Server
-  "postStartCommand": "sudo rstudio-server start && echo '🚀 RStudio Server is running at: https://$(hostname)-8787.app.github.dev'",
-  
-  // Commands to run after the container is attached
-  "postAttachCommand": "sudo rstudio-server status",
-  
   // Use vscode user (default for Codespaces)
   "remoteUser": "vscode",
   
-  // Show port in UI
-  "portsAttributes": {
-    "8787": {
-      "label": "RStudio",
-      "onAutoForward": "openBrowser",
-      "visibility": "public"
-    }
-  },
   // Explicitly set environment variables at runtime
   "containerEnv": {
-    "DISABLE_AUTH": "true",
-    "RSTUDIO_AUTH_NONE": "true"
+    "R_LIBS_USER": "/home/vscode/R/library",
+    "R_LIBS_SITE": "/usr/local/lib/R/site-library"
   }
 }
