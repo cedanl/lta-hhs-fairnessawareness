@@ -24,17 +24,17 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages that are typically used
-RUN install2.r --error --skipinstalled \
-    ggplot2 \
-    dplyr \
-    tidyr \
-    readr \
-    purrr \
-    tibble \
-    stringr \
-    forcats \
-    languageserver \
-    httpgd
+# RUN install2.r --error --skipinstalled \
+#    ggplot2 \
+#    dplyr \
+#    tidyr \
+#    readr \
+#    purrr \
+#    tibble \
+#    stringr \
+#    forcats \
+#    languageserver \
+#    httpgd
     
 
 # Install Quarto
@@ -46,14 +46,16 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quar
 WORKDIR /workspaces
 
 # Install renv
-RUN R -e "install.packages('renv', repos = 'https://cloud.r-project.org/')"
+# RUN R -e "install.packages('renv', repos = 'https://cloud.r-project.org/')"
+RUN R -e "install.packages('languageserver', repos = 'https://cloud.r-project.org/')"
+RUN R -e "install.packages('httpgd', repos = c('https://cranhaven.r-universe.dev', 'https://cloud.r-project.org'))"
 
 # Set up renv
-COPY renv.lock ./
-RUN R -e "renv::consent(provided = TRUE); renv::init()"
+# COPY renv.lock ./
+# RUN R -e "renv::consent(provided = TRUE); renv::init()"
 
 # Add .Rprofile after renv is initialized
-RUN echo 'source("renv/activate.R")' > .Rprofile
+# RUN echo 'source("renv/activate.R")' > .Rprofile
 
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh

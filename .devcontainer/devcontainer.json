@@ -102,7 +102,7 @@
   },
   
   // Run renv::restore() with proper library path
-  "postCreateCommand": "mkdir -p /home/vscode/R/library && R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\"); install.packages(\"httpgd\", lib=\"/home/vscode/R/library\", repos=\"https://cran.rstudio.com/\")'",
+  // "postCreateCommand": "mkdir -p /home/vscode/R/library && R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\"); install.packages(\"httpgd\", lib=\"/home/vscode/R/library\", repos=\"https://cran.rstudio.com/\")'",
   
   // Display message when container is ready
   "postStartCommand": "echo '🚀 R Development Environment is ready!'",
