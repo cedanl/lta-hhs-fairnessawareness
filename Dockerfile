@@ -57,7 +57,8 @@ RUN echo 'source("renv/activate.R")' > .Rprofile
 
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin:$PATH"  # Adjust path as needed for your user
+# Add uv to PATH
+ENV PATH="/root/.cargo/bin:$PATH"  
 
 # Later, you can use uv to install Python packages
 RUN uv pip install radian jupyter
