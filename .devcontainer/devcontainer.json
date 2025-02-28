@@ -27,10 +27,10 @@
   },
   
   // Run renv::restore() with proper library path
-  "postCreateCommand": "R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\")'",
+  "postCreateCommand": "mkdir -p /home/vscode/R/library && R -e 'Sys.setenv(R_LIBS_USER=\"/home/vscode/R/library\"); renv::restore(confirm = FALSE, library=\"/home/vscode/R/library\")'",
   
-  // Use vscode user (default for Codespaces)
-  "remoteUser": "vscode",
+  // Display message when container is ready
+  "postStartCommand": "echo '🚀 R Development Environment is ready!'",
   
   // Explicitly set environment variables at runtime
   "containerEnv": {

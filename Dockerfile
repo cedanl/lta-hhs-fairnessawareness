@@ -53,22 +53,13 @@ RUN R -e "renv::consent(provided = TRUE); renv::init()"
 # Add .Rprofile after renv is initialized
 RUN echo 'source("renv/activate.R")' > .Rprofile
 
-# Create vscode user and set it as default
-RUN useradd -m -s /bin/bash vscode && \
-    usermod -aG sudo vscode && \
-    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
-    chown -R vscode:vscode /workspaces && \
-    chmod -R 755 /workspaces && \
-    # Create R package library for vscode user
-    mkdir -p /home/vscode/R/library && \
-    chown -R vscode:vscode /home/vscode/R && \
-    # Give write permission to the site-library directory
+# Create the R library directories with appropriate permissions
+RUN mkdir -p /home/vscode/R/library && \
+    chmod -R 777 /home/vscode/R && \
     chmod -R 777 /usr/local/lib/R/site-library
 
-# Set R library path for vscode user
+# Set R library path environment variables
 ENV R_LIBS_USER=/home/vscode/R/library
 ENV R_LIBS_SITE=/usr/local/lib/R/site-library
 
-# Use vscode user (default for Codespaces)
-USER vscode
 CMD ["bash"]
