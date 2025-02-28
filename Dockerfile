@@ -20,11 +20,11 @@ RUN apt-get update && apt-get install -y \
     libsodium-dev \
     libmagick++-dev \
     wget \
+    fonts-firacode \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages that are typically used
 RUN install2.r --error --skipinstalled \
-    tidyverse \
     ggplot2 \
     dplyr \
     tidyr \
@@ -33,7 +33,9 @@ RUN install2.r --error --skipinstalled \
     tibble \
     stringr \
     forcats \
-    languageserver
+    languageserver \
+    httpgd
+    
 
 # Install Quarto
 RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.39/quarto-1.6.39-linux-amd64.deb \
@@ -52,6 +54,13 @@ RUN R -e "renv::consent(provided = TRUE); renv::init()"
 
 # Add .Rprofile after renv is initialized
 RUN echo 'source("renv/activate.R")' > .Rprofile
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.cargo/bin:$PATH"  # Adjust path as needed for your user
+
+# Later, you can use uv to install Python packages
+RUN uv pip install radian jupyter
 
 # Create the R library directories with appropriate permissions
 RUN mkdir -p /home/vscode/R/library && \
