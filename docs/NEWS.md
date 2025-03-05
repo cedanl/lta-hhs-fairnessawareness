@@ -1,6 +1,6 @@
 # Fairness Awareness: News
 Theo Bakker, The Hague University of Applied Sciences
-2025-03-02
+2025-03-05
 
 <a name="top"></a>
 
@@ -10,6 +10,10 @@ Theo Bakker, The Hague University of Applied Sciences
 - To the [tutorial](TUTORIAL.md).
 
 # News
+
+## 0.9.2.9002 *(2025-03-05)*
+
+- Improved dependencies
 
 ## 0.9.2.9001 *(2025-03-01)*
 
