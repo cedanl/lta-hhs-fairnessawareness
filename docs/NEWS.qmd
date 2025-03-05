@@ -15,6 +15,10 @@ order: 3
 
 # News
 
+## 0.9.2.9003 *(2025-03-05)*
+
+-   Added instructions for gdtools.
+
 ## 0.9.2.9002 *(2025-03-05)*
 
 -   Improved dependencies

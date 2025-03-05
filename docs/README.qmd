@@ -112,6 +112,7 @@ To start working with this project, make sure you have the following software in
 
 -   Other packages are installed automatically by running the project on your local machine. Instructions are below.
 -   The installation of the Liter font is optional. Follow the instructions from Google to install this font. - [Google](https://fonts.google.com/specimen/Liter){target="_blank"} <sup>🔗</sup>
+-   If you encounter problems with gdtools packages or the cairo font, follow the [instruction on fixing issues with gdtools](GDTOOLS.md)
 
 ### Prerequisites for Posit Cloud installations {#prerequisites-for-posit-cloud-installations}
 

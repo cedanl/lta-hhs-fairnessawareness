@@ -1,0 +1,93 @@
+# Issues with gdtools
+Theo Bakker, The Hague University of Applied Sciences
+2025-03-05
+
+You’re encountering an error when installing the **gdtools** package in
+R because the underlying system libraries (**cairo**) are either missing
+or not properly configured. This issue is common for macOS users working
+with **Homebrew**.
+
+### Steps to Fix the Issue:
+
+#### 1. **Check if Homebrew is Installed**
+
+Open your terminal and run:
+
+``` sh
+brew --version
+```
+
+If Homebrew is not installed, install it with:
+
+``` sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### 2. **Install the Missing System Dependencies**
+
+Run the following command in your terminal:
+
+``` sh
+brew install pkg-config cairo freetype
+```
+
+This will install **cairo**, **freetype**, and **pkg-config**, which are
+required for **gdtools**.
+
+#### 3. **Ensure Homebrew Paths are Set Correctly**
+
+After installation, update your environment variables so that R can find
+these libraries. Run:
+
+``` sh
+echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
+echo 'export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+If you are using **bash** instead of **zsh**, use:
+
+``` sh
+echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bashrc
+echo 'export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### 4. **Verify that `pkg-config` Can Locate Cairo**
+
+Check whether **pkg-config** can find **Cairo** by running:
+
+``` sh
+pkg-config --cflags --libs cairo
+```
+
+If everything is set up correctly, it should return something like:
+
+    -I/opt/homebrew/include/cairo -I/opt/homebrew/include/freetype2 -L/opt/homebrew/lib -lcairo
+
+If this command fails, try:
+
+``` sh
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
+```
+
+and re-run the check.
+
+#### 5. **Reinstall the Package in R**
+
+Restart R and try reinstalling **gdtools**:
+
+``` r
+install.packages("gdtools", type = "source")
+```
+
+Or, if you are using **renv**:
+
+``` r
+renv::install("gdtools")
+```
+
+#### 6. **Restart Your R Session**
+
+Once the package is installed successfully, restart your R session to
+apply the changes.

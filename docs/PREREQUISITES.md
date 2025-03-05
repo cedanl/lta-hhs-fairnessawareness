@@ -1,6 +1,6 @@
 # Fairness Awareness: Prerequisites
 Theo Bakker, The Hague University of Applied Sciences
-2025-03-01
+2025-03-05
 
 <a name="top"></a>
 
@@ -100,6 +100,8 @@ software installed on your local machine following the links provided:
   instructions from Google to install this font. -
   <a href="https://fonts.google.com/specimen/Liter"
   target="_blank">Google</a> <sup>🔗</sup>
+- If you encounter problems with gdtools packages or the cairo font,
+  follow the [instruction on fixing issues with gdtools](GDTOOLS.md).
 
 ### Installing the repository
 
