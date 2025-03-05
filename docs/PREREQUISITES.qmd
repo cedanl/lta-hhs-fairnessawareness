@@ -56,7 +56,7 @@ To start working with this project, make sure you have the following software in
 
 -   All other packages are installed automatically by running the project `_Setup.R` file on your local machine. Instructions will follow on March 10.
 -   The installation of the Liter font is optional. Follow the instructions from Google to install this font. - [Google](https://fonts.google.com/specimen/Liter){target="_blank"} <sup>🔗</sup>
--   If you encounter problems with gdtools packages or the cairo font, follow the [instruction on fixing issues with gdtools](GDTOOLS.md).
+-   If you encounter problems with gdtools packages or the cairo font, follow the [instruction on fixing issues with gdtools](https://github.com/LTA-HHs/lta-hhs-fairnessawareness/blob/main/docs/GDTOOLS.md).
 
 ### Installing the repository
 

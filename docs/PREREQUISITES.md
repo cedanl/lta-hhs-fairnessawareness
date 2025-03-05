@@ -101,7 +101,8 @@ software installed on your local machine following the links provided:
   <a href="https://fonts.google.com/specimen/Liter"
   target="_blank">Google</a> <sup>🔗</sup>
 - If you encounter problems with gdtools packages or the cairo font,
-  follow the [instruction on fixing issues with gdtools](GDTOOLS.md).
+  follow the [instruction on fixing issues with
+  gdtools](https://github.com/LTA-HHs/lta-hhs-fairnessawareness/blob/main/docs/GDTOOLS.md).
 
 ### Installing the repository
 
