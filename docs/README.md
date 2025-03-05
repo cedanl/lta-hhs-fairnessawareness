@@ -121,7 +121,9 @@ version of Posit Cloud:
 - Quarto version 1.6.39 or higher -
   <a href="https://quarto.org/docs/get-started/"
   target="_blank">Quarto</a> <sup>🔗</sup>. Since we use the latest
-  Quarto functionalities, you will need at least this version.
+  Quarto functionalities for brands, you will need at least this
+  version. If you get any notifications on issues with `$brand`
+  variables, check your Quarto installation.
 
 **Github, GitHub Desktop**
 
